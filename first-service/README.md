@@ -66,16 +66,16 @@ You can create a native executable using:
 
 ```
 ./mvnw package -Pnative
+
+# to verify that our native artifact was properly constructed
+./mvnw verify -Pnative	
 ```
 
-Or you can use Docker to build the native executable using:
+### Creating a container
 
 ```
+# create a container image using our native executable
 ./mvnw package -Pnative -Dquarkus.native.container-build=true
-
-# to build in a container it is recommended you add these to your application.properties so you do not need to specify them every time.
-quarkus.native.container-build=true
-quarkus.native.container-runtime=docker
 ```
 
 You can then execute your binary: `./target/*-runner`
@@ -104,23 +104,15 @@ docker run -i --rm -p 8080:8080 -d --name first-service mgperez/first-service:jv
 
 To build the native binary image and make it even smaller, use a Quarkus distroless base image. Use the following Dockerfile and put it into src/main/docker/Dockerfile.native.
 
-Then use the following command to build the native image and run it:
+Then use the following command to build the **native image** and run it:
 
 [For more info](https://quarkus.io/guides/building-native-image#creating-a-container)
 
 ```
-# Maven build to produce an executable from inside a container:
-./mvnw package -Pnative -Dnative-image.docker-build=true
-
-mvn package -Pnative -Dquarkus.native.container-build=true
-docker-compose up --build
+# Creating a container
+./mvnw package -Pnative -Dquarkus.native.container-build=true
 
 # Execute Docker
-mvn package -Pnative -Dquarkus.native.container-runtime=docker
-
-# to build in a container it is recommended you add these to your application.properties so you do not need to specify them every time.
-quarkus.native.container-build=true
-quarkus.native.container-runtime=docker
 ```
 
 Then, if you didn’t delete the generated native executable, you can build the docker image with:
@@ -128,7 +120,6 @@ Then, if you didn’t delete the generated native executable, you can build the 
 ```
 # Create the docker image in the image local repository:
 docker build -f src/main/docker/Dockerfile.native -t mgperez/first-service:native .
-docker tag mgperez/first-service:native mgperez/first-service:native
 % docker images | grep -i mgperez
 ```
 
@@ -137,9 +128,11 @@ And finally, run it with:
 https://linuxize.com/post/docker-run-command/
 
 ```
+# Now, we can run the container using:
 docker run -i --rm -p 8080:8080 -d --name first-service mgperez/first-service:native
+docker inspect --format='{{ .NetworkSettings.Ports }}' first-service
 % docker ps | grep first
-% docker kill first-service
+% docker stop first-service
 ```
 
 ### Docker Hub
