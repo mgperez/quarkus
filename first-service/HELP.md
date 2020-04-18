@@ -8,7 +8,11 @@
 - [Preparing to Install Minishift](https://docs.okd.io/3.11/minishift/getting-started/preparing-to-install.html)
 - [Starting Minishift](https://docs.okd.io/3.11/minishift/getting-started/quickstart.html)
 
+
+
 https://github.com/davsclaus/minishift-hello
+
+
 
 - [How to install virt manager on OSX to manage KVM virtual machines](https://www.youtube.com/watch?v=EVlc5G3TzYE)
 
@@ -26,5 +30,23 @@ https://minikube.sigs.k8s.io/docs/reference/drivers/docker/
 minikube start --driver=docker
 
 Done! kubectl is now configured to use "minikube"
+```
+
+
+
+## [Installing Kubernetes on Macbook Pro | minikube | K8s Primer | Tech Primers](https://www.youtube.com/watch?v=fXE1Gu71XNM)
+
+https://kubernetes.io/docs/tasks/tools/install-minikube/
+
+Https://github.com/TechPrimers/minikube-installation-macbook-pro
+
+https://minikube.sigs.k8s.io/docs/reference/drivers/hyperkit/
+
+https://docs.okd.io/3.11/minishift/getting-started/setting-up-virtualization-environment.html#setting-up-hyperkit-driver
+
+
+
+```
+$ hyperkit -v 
 ```
 
